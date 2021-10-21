@@ -19,7 +19,6 @@ Avoir un json:
     stocke le solde
 
 Avoir un ficher texte pour chaque personne qui stocke l'historique des virements
-
 """
 
 
