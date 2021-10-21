@@ -1,7 +1,7 @@
 import json
 import random
 from datetime import datetime
-
+import math
 
 """
 Distributeur de billet :
@@ -76,7 +76,7 @@ def withdraw():
 
     while True:
         try:
-            amountMoneyWithdraw = int(input("Combien d'argent veux-tu retirer ?\n"))
+            amountMoneyWithdraw = abs(int(input("Combien d'argent veux-tu retirer ?\n")))
             if amountMoneyWithdraw > userData[password]:
                 print("Tu ne pas retirer tout ça, pauvre fou")
                 continue
@@ -109,7 +109,7 @@ def moneyInput():
 
     while True:
         try:
-            amountMoneyInput = int(input("Combien d'argent veux-tu ajouter ?\n"))
+            amountMoneyInput = abs(int(input("Combien d'argent veux-tu ajouter ?\n")))
             break
         except ValueError:
             print("Je n'ai pas compris")
@@ -127,7 +127,10 @@ def moneyInput():
     manageFile(userData)
 
 
-def manageFile(toWrite=None):
+def manageFile(toWrite=None) -> dict:
+    """
+    Function wich read a file if you don't give any args or write if you give one
+    """
 
     if toWrite is not None:
         with open('userData.json', 'w', encoding='utf-8') as f:
@@ -138,7 +141,10 @@ def manageFile(toWrite=None):
         return userData
 
 
-def manageLog(password, amount):
+def manageLog(password: str, amount: int) -> None:
+    """
+    Create a log file if not already existing, or modify it.
+    """
     with open(f"log/log-{password}.txt", 'a', encoding='utf-8') as f:
         now = datetime.now()
         dateString = now.strftime("%d/%m/%Y %H:%M:%S")
